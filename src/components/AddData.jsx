@@ -1,6 +1,6 @@
 import noteService from '../services/notes'
 
-const AddData = ({ persons, setPersons, name, number }) => {
+const AddData = ({ persons, setPersons, name, number, setAlertMessage }) => {
 //    console.log(name)
 //    console.log(number)
 //    console.log(persons)
@@ -33,11 +33,26 @@ const existingPerson = persons.find(person => person.name === name);
   const newData = {name, number, id: (Math.max(...persons.map(p => Number(p.id)), 0) + 1).toString()
   };
   noteService
-  .addData(newData)
+/*  .addData(newData)
   .then(response => {
     setPersons(persons.concat(newData))
     console.log(response)
   })
-};
+}; */
+
+  .addData(newData)
+  .then(response => {
+    setPersons(persons.concat(newData));
+    console.log(response)
+  })
+  .catch(error => {
+    console.error('Error occurred:', error.message);
+    // Display the error to the user
+    setAlertMessage(error.message);
+    setTimeout(() => {
+      setAlertMessage(null);
+    }, 5000);
+  });
+}
 
 export default AddData

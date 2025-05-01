@@ -43,9 +43,10 @@ const App = () => {
 
   const handleAddData = (event) => {
     event.preventDefault();
-    AddData({ persons, setPersons, name: newName, number: newNumber });
+    AddData({ persons, setPersons, name: newName, number: newNumber, setAlertMessage });
     setNewName('');
     setNewNumber('');
+    setAlertMessage('');
     setNotificationMessage(
       `Added '${newName}'`
     )
